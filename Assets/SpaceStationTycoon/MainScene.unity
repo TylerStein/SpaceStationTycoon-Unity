@@ -1808,6 +1808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03134a72931af5d4ea136d4d0c04c6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateManager: {fileID: 1245531210}
   buildingGrid: {fileID: 1142208979}
   spawningController: {fileID: 470266603}
   dockTemplate: {fileID: 11400000, guid: bd597721130b65244ac3ba4190470cf7, type: 2}
@@ -6172,6 +6173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0d89cea4e1b8d4e93cae3deee24a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    builtModules: []
 --- !u!114 &1245531220
 MonoBehaviour:
   m_ObjectHideFlags: 0

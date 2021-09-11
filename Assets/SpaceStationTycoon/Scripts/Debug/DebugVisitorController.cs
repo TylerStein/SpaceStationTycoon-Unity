@@ -7,9 +7,12 @@ namespace SST.Gameplay
     using AI;
     using Building;
     using Data;
+    using Controllers;
+    using Modules;
 
     public class DebugVisitorController : MonoBehaviour
     {
+        public StateManager stateManager;
         public BuildingGrid buildingGrid;
         public SpawningController spawningController;
         public List<DebugVisitor> visitors = new List<DebugVisitor>();
@@ -26,6 +29,8 @@ namespace SST.Gameplay
 
         public int maxVisitors = 1;
         public int maxVisitorCrew = 4;
+
+        public string targetModuleDomain = "module";
 
         // Start is called before the first frame update
         void Start() {
@@ -185,9 +190,37 @@ namespace SST.Gameplay
                     crew.onShip = false;
                     crew.crewObject.SetActive(true);
 
-                    int rngIndex = Random.Range(0, pathPositions.Count);
-                    Vector2Int goalPosition = buildingGrid.WorldToGridSpace(pathPositions[rngIndex]);
-                    crew.goalPosition = goalPosition;
+                    // decide on a destination
+                    var targets = stateManager.buildStateController.FindModules(targetModuleDomain);
+                    if (targets.Count == 0) {
+                        // can't do anything :(
+                        crew.goalPosition = visitor.dockGridPosition;
+                    } else {
+                        int rngIndex = Random.Range(0, targets.Count);
+                        ModuleData targetModule = targets[rngIndex];
+                        ModuleBehaviour behaviour = stateManager.buildStateController.GetModuleBehaviour(targetModule.id);
+                        Vector2Int modulePos = new Vector2Int(targetModule.position.x, targetModule.position.y);
+                        BuildCell cell = buildingGrid.GetCell(modulePos, targetModule.position.z);
+
+                        var portal = behaviour.templateData.portal;
+                        Vector2Int rotatedPoint = buildingGrid.GetRotatedPoint(behaviour.templateData.pivot, portal.point, targetModule.direction) + modulePos;
+                        DirectionFlags rotatedDirection = Direction.RotateFlags(portal.direction, targetModule.direction);
+                        BuildCell[] bufferCells = new BuildCell[4];
+                        int cellCount = buildingGrid.GetCellsWithNavTypeInDirections(rotatedPoint, rotatedDirection, ENavType.Walkable, bufferCells);
+                        if (cellCount == 0) {
+                            // can't do anything yet again :(
+                            crew.goalPosition = visitor.dockGridPosition;
+                        } else {
+                            int rngCell = Random.Range(0, cellCount - 1);
+                            Vector3Int gridPos = buildingGrid.IndexToGridSpace(bufferCells[rngCell].gridIndex);
+                            crew.goalPosition = new Vector2Int(gridPos.x, gridPos.y);
+                        }
+
+                    }
+
+                    //int rngIndex = Random.Range(0, pathPositions.Count);
+                    //Vector2Int goalPosition = buildingGrid.WorldToGridSpace(pathPositions[rngIndex]);
+                    //crew.goalPosition = goalPosition;
 
                     crew.navAgent.UpdatePosition();
                     crew.navAgent.RebuildNavGrid(true);

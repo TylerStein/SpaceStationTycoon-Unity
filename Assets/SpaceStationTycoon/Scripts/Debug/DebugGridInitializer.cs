@@ -83,7 +83,7 @@ namespace SST.Gameplay
                     position = position,
                     moduleName = template.moduleName
                 };
-                stateManager.buildStateController.AddModule(moduleBehaviour.instanceData);
+                stateManager.buildStateController.AddModule(moduleBehaviour);
 
                 BuildCell cell = new BuildCell() {
                     gameObject = instance,

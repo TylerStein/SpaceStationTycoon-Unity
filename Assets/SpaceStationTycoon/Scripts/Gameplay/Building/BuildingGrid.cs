@@ -66,6 +66,68 @@ namespace SST.Gameplay.Building
             gridChanged.Invoke();
         }
 
+        public int GetCellsWithNavTypeInDirections(Vector2Int point, DirectionFlags directions, ENavType navType, BuildCell[] cells, int layer = 0) {
+            int count = 0;
+            if (directions.HasFlag(DirectionFlags.NORTH)) {
+                BuildCell cell = GetCell(point + Vector2Int.up, layer);
+                if (cell.navType == navType) {
+                    cells[count] = cell;
+                    count++;
+                }
+            }
+
+            if (directions.HasFlag(DirectionFlags.EAST)) {
+                BuildCell cell = GetCell(point + Vector2Int.left, layer);
+                if (cell.navType == navType) {
+                    cells[count] = cell;
+                    count++;
+                }
+            }
+
+            if (directions.HasFlag(DirectionFlags.SOUTH)) {
+                BuildCell cell= GetCell(point + Vector2Int.down, layer);
+                if (cell.navType == navType) {
+                    cells[count] = cell;
+                    count++;
+                }
+            }
+
+            if (directions.HasFlag(DirectionFlags.WEST)) {
+                BuildCell cell = GetCell(point + Vector2Int.right, layer);
+                if (cell.navType == navType) {
+                    cells[count] = cell;
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public bool CheckCellNavTypeInDirections(Vector2Int point, DirectionFlags directions, ENavType navType, out BuildCell cell, int layer = 0) {
+            if (directions.HasFlag(DirectionFlags.NORTH)) {
+                cell = GetCell(point + Vector2Int.up, layer);
+                if (cell.navType == navType) return true;
+            }
+
+            if (directions.HasFlag(DirectionFlags.EAST)) {
+                cell = GetCell(point + Vector2Int.left, layer);
+                if (cell.navType == navType) return true;
+            }
+
+            if (directions.HasFlag(DirectionFlags.SOUTH)) {
+                cell = GetCell(point + Vector2Int.down, layer);
+                if (cell.navType == navType) return true;
+            }
+
+            if (directions.HasFlag(DirectionFlags.WEST)) {
+                cell = GetCell(point + Vector2Int.right, layer);
+                if (cell.navType == navType) return true;
+            }
+
+            cell = null;
+            return false;
+        }
+
         public BuildCell GetCell(Vector2Int point, int layer = 0) {
             if (IsPointInGrid(point, layer) == false) {
                 return new BuildCell() { moduleId = 0, buildType = EBuildType.None };
@@ -127,6 +189,12 @@ namespace SST.Gameplay.Building
                 Mathf.RoundToInt(worldPosition.z + worldSpaceOffset.x),
                 Mathf.RoundToInt(worldPosition.x + worldSpaceOffset.z)
             );
+        }
+
+        public Vector3Int IndexToGridSpace(int index) {
+            int x, y, z;
+            grid.Position(index, out x, out y, out z);
+            return new Vector3Int(x, y, z);
         }
 
         public bool IsPointInGrid(Vector2Int point, int layer = 0) {

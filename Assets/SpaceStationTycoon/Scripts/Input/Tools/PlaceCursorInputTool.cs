@@ -119,33 +119,8 @@ namespace SST.Input.Tools
             for (int i = 0; i < portals.Length; i++) {
                 Vector2Int rotatedPoint = buildingGrid.GetRotatedPoint(placePivot, portals[i].point, direction) + activeGridPoint;
                 DirectionFlags rotatedDirection = Direction.RotateFlags(portals[i].direction, direction);
-                if (rotatedDirection.HasFlag(DirectionFlags.NORTH)) {
-                    bufferCell = buildingGrid.GetCell(rotatedPoint + Vector2Int.up, layer);
+                if (buildingGrid.CheckCellNavTypeInDirections(rotatedPoint, rotatedDirection, ENavType.Walkable, out bufferCell)) {
                     Debug.DrawLine(activeSnapPoint, buildingGrid.GridToWorldSpace(rotatedPoint + Vector2Int.up));
-                    if (bufferCell.navType == ENavType.Walkable) {
-                        return true;
-                    }
-                }
-
-                if (rotatedDirection.HasFlag(DirectionFlags.EAST)) {
-                    bufferCell = buildingGrid.GetCell(rotatedPoint + Vector2Int.left, layer);
-                    Debug.DrawLine(activeSnapPoint, buildingGrid.GridToWorldSpace(rotatedPoint + Vector2Int.right));
-                    if (bufferCell.navType == ENavType.Walkable) {
-                        return true;
-                    }
-                }
-
-                if (rotatedDirection.HasFlag(DirectionFlags.SOUTH)) {
-                    bufferCell = buildingGrid.GetCell(rotatedPoint + Vector2Int.down, layer);
-                    Debug.DrawLine(activeSnapPoint, buildingGrid.GridToWorldSpace(rotatedPoint + Vector2Int.down));
-                    if (bufferCell.navType == ENavType.Walkable) {
-                        return true;
-                    }
-                }
-
-                if (rotatedDirection.HasFlag(DirectionFlags.WEST)) {
-                    bufferCell = buildingGrid.GetCell(rotatedPoint + Vector2Int.right, layer);
-                    Debug.DrawLine(activeSnapPoint, buildingGrid.GridToWorldSpace(rotatedPoint + Vector2Int.left));
                     if (bufferCell.navType == ENavType.Walkable) {
                         return true;
                     }
@@ -204,7 +179,7 @@ namespace SST.Input.Tools
                     moduleName = moduleBehaviour.templateData.moduleName
                 };
 
-                stateManager.buildStateController.AddModule(moduleBehaviour.instanceData);
+                stateManager.buildStateController.AddModule(moduleBehaviour);
 
                 int pointsCount = buildingGrid.GetCoveredPointsNoAlloc(pointsBuffer, activeGridPoint, placePivot, placeSize, direction);
                 for (int i = 0; i < pointsCount; i++) {
