@@ -9,9 +9,8 @@ namespace SST.Gameplay
 
     public class SpawningController : MonoBehaviour
     {
-        public GameObject visitorPrefab;
         public GameObject shipPrefab;
-        public GameObject crewPrefab;
+        public GameObject guestPrefab;
 
         public List<GameObject> modulePrefabs;
         [SerializeField] private Dictionary<ModuleTemplateData, GameObject> modulePrefabDictionary;

@@ -9,16 +9,19 @@ namespace SST.Gameplay.Controllers
     using SST.Gameplay.Modules;
 
     [System.Serializable]
-    public class BuildStateController : MonoBehaviour
+    public class ModuleStateController : MonoBehaviour
     {
-        [SerializeField] private BuildStateData data;
+        [SerializeField] private ModuleStateData data;
         private Dictionary<uint, ModuleBehaviour> moduleBehaviours;
         private DomainTree<List<uint>> moduleDomainTree;
 
-        public BuildStateController() {
+        public List<ModuleData> AllModuleData => data.builtModules;
+        public List<ModuleBehaviour> AllModuleBehaviours => moduleBehaviours.Values.ToList();
+
+        public ModuleStateController() {
             moduleBehaviours = new Dictionary<uint, ModuleBehaviour>();
             moduleDomainTree = new DomainTree<List<uint>>();
-            data = new BuildStateData() {
+            data = new ModuleStateData() {
                 builtModules = new List<ModuleData>(),
             };
         }
@@ -72,7 +75,7 @@ namespace SST.Gameplay.Controllers
             return moduleBehaviours[moduleId];
         }
 
-        public void SetData(BuildStateData data) {
+        public void SetData(ModuleStateData data) {
             this.data = data;
         }
     }

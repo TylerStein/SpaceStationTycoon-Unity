@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SST.Gameplay.AI
+namespace SST.Gameplay.Navigation
 {
-    using Building;
+    using SST.Gameplay.Building;
 
     public class GridNavAgent : MonoBehaviour
     {
@@ -29,20 +28,19 @@ namespace SST.Gameplay.AI
         public Vector3 checkpointWorldPosition;
 
         private void Awake() {
+            Initialize();
+        }
+
+        public void Initialize() {
             if (buildGrid != null) {
                 navGrid = new Grid2D<AStarCell>(buildGrid.gridSize.x, buildGrid.gridSize.y, new AStarCell());
                 navigation = new AStarNavigation(navGrid);
-            }
-        }
-
-        private void Start() {
-            UpdatePosition();
-            RebuildNavGrid();
-           // SetRandomGoal();
-
-            buildGrid.gridChanged.AddListener(() => {
+                UpdatePosition();
                 RebuildNavGrid();
-            });
+                buildGrid.gridChanged.AddListener(() => {
+                    RebuildNavGrid();
+                });
+            }
         }
 
         public void SetGoalAndNavigate(Vector2Int target) {
@@ -72,7 +70,6 @@ namespace SST.Gameplay.AI
 
             if (hasPath) {
                 RecalculatePath();
-                if (!hasPath) SetRandomGoal();
             }
         }
 

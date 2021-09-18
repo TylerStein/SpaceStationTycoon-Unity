@@ -6,7 +6,7 @@ namespace SST.Data
     public struct IdStateData
     {
         public IdPool shipIdPool;
-        public IdPool moduleIdPool;
+        public IdPool idPool;
     }
 
     public struct IdPool

@@ -6,7 +6,8 @@ namespace SST.Gameplay.Controllers {
     public class StateManager : MonoBehaviour
     {
         public AssetStateController assetStateController;
-        public BuildStateController buildStateController;
+        public ModuleStateController moduleStateController;
+        public VisitorStateController visitorStateController;
         public EconomyStateController economyStateController;
         public IdBindingStateController idBindingStateData;
         public IdStateController idStateController;
@@ -21,7 +22,8 @@ namespace SST.Gameplay.Controllers {
 
         public void LoadFromStates(StateData data) {
             assetStateController.SetData(data.assetState);
-            buildStateController.SetData(data.buildState);
+            moduleStateController.SetData(data.moduleState);
+            visitorStateController.SetData(data.visitorState);
             economyStateController.SetData(data.economyState);
             idBindingStateData.SetData(data.idBindingState);
             idStateController.SetData(data.idState);

@@ -1,0 +1,10 @@
+{
+  "name": "core.schemas.module.storage",
+  "inherit": [
+    "core.schemas.module.base"
+  ],
+  "props": [
+    { "ptype": "string", "pname": "resource_type" },
+    { "ptype": "int", "pname": "max_storage" }
+  ]
+}

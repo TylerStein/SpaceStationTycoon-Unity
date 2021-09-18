@@ -10,7 +10,8 @@ namespace SST.Data
         public AssetStateData assetState;
         public IdStateData idState;
         public ResourceStateData resourceState;
-        public BuildStateData buildState;
+        public ModuleStateData moduleState;
+        public VisitorStateData visitorState;
         public EconomyStateData economyState;
         public IdBindingStateData idBindingState;
     }

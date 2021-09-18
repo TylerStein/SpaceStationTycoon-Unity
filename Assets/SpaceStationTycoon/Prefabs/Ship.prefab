@@ -104,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6255039211124202032}
+  - component: {fileID: 5420394164457533606}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -129,6 +130,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5420394164457533606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255039211124201999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624b5e6b7414e074aa807dceef37147f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceData:
+    id: 0
+    currentFuel: 0
+    maxFuel: 0
+    fuelType: 0
+    currentRepair: 0
+    maxRepair: 0
+    repairType: 0
+  dockModule: {fileID: 0}
+  stateManager: {fileID: 0}
+  shipObject: {fileID: 6255039211124201999}
+  dockWorldPosition: {x: 0, y: 0, z: 0}
+  edgeWorldPosition: {x: 0, y: 0, z: 0}
+  stateMachine:
+    _activeState:
+      stateName: 
+    _loggingEnabled: 0
+  guestIds: 
+  isDocked: 0
+  hasDocked: 0
+  moveSpeed: 0.05
 --- !u!1 &6255039211806693523
 GameObject:
   m_ObjectHideFlags: 0

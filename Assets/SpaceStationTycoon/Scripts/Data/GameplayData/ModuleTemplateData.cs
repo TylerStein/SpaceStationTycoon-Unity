@@ -15,6 +15,7 @@ namespace SST.Data
         public Vector2Int pivot;
         public GameObject prefab;
         public Portal portal;
+        public ModuleDef def;
 
         public PlaceData GetPlaceData() => new PlaceData() {
             pivot = pivot,

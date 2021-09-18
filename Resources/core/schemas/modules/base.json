@@ -1,0 +1,9 @@
+{
+  "name": "core.shcemas.module.base",
+  "inherit": [],
+  "props": [
+    { "ptype": "Vector2Int", "pname": "size" },
+    { "pytpe": "Vector2Int", "pname": "portal_position" },
+    { "ptype": "DirectionFlag", "pname": "portal_direction" }
+  ]
+}

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace SST.Data
 {
     [System.Serializable]
-    public struct BuildStateData
+    public struct ModuleStateData
     {
         public List<ModuleData> builtModules;
     }

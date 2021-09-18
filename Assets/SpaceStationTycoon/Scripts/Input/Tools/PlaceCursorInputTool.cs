@@ -165,7 +165,7 @@ namespace SST.Input.Tools
             if (lastPlacementValid && placePrefab) {
                 Debug.Log("Valid Placement");
 
-                uint moduleId = stateManager.idStateController.GetUniqueModuleId();
+                uint moduleId = stateManager.idStateController.GetUniqueId();
 
                 GameObject instance = Instantiate(placePrefab);
                 instance.transform.position = activeSnapPoint;
@@ -173,13 +173,13 @@ namespace SST.Input.Tools
 
                 ModuleBehaviour moduleBehaviour = instance.GetComponentInChildren<ModuleBehaviour>();
                 moduleBehaviour.instanceData = new ModuleData() {
-                    id = stateManager.idStateController.GetUniqueModuleId(),
+                    id = stateManager.idStateController.GetUniqueId(),
                     direction = direction,
                     position = new Vector3Int(activeGridPoint.x, activeGridPoint.y, 0),
                     moduleName = moduleBehaviour.templateData.moduleName
                 };
 
-                stateManager.buildStateController.AddModule(moduleBehaviour);
+                stateManager.moduleStateController.AddModule(moduleBehaviour);
 
                 int pointsCount = buildingGrid.GetCoveredPointsNoAlloc(pointsBuffer, activeGridPoint, placePivot, placeSize, direction);
                 for (int i = 0; i < pointsCount; i++) {

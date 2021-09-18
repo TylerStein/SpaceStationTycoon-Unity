@@ -1756,9 +1756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260ff0067105a0e478933770281ea124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visitorPrefab: {fileID: 2236880228958226027, guid: 246b7ac1a46ad5449901bf73599a7f6e, type: 3}
   shipPrefab: {fileID: 6255039211124201999, guid: 6e71832e2e6bcc244aa15fe4504dea77, type: 3}
-  crewPrefab: {fileID: 2236880228958226027, guid: 246b7ac1a46ad5449901bf73599a7f6e, type: 3}
+  guestPrefab: {fileID: 2236880228958226027, guid: 246b7ac1a46ad5449901bf73599a7f6e, type: 3}
   modulePrefabs:
   - {fileID: 7115903654773232414, guid: 8f6281df0ef0e10468267f37ed08ada1, type: 3}
   - {fileID: 5650844100863384671, guid: fe6ec09a4f419d146924efbfe49c9484, type: 3}
@@ -1777,7 +1776,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &470266605
 MonoBehaviour:
@@ -1813,13 +1812,13 @@ MonoBehaviour:
   spawningController: {fileID: 470266603}
   dockTemplate: {fileID: 11400000, guid: bd597721130b65244ac3ba4190470cf7, type: 2}
   pathTemplate: {fileID: 11400000, guid: 09f899f063f7df04aaf0d58511b1c332, type: 2}
-  shipMoveSpeed: 5
-  dockPositions: []
-  pathPositions: []
   gridMaxWorld: {x: 1, y: 1, z: 1}
   gridMinWorld: {x: 1, y: 1, z: 1}
-  maxVisitors: 1
-  maxVisitorCrew: 4
+  maxShips: 1
+  minGuestsPerShip: 2
+  maxGuestsPerShip: 4
+  guestTargetModuleDomain: module
+  dockModuleDomain: module.dock
 --- !u!1 &484324233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,60 +2233,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559991625}
   m_CullTransparentMesh: 1
---- !u!1 &572864520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 572864521}
-  - component: {fileID: 572864522}
-  m_Layer: 0
-  m_Name: GridAgent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &572864521
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572864520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &572864522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572864520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc2c9e5c3aca3ba45b98377db2b4375a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  minTargetDistance: 0.15
-  currentPosition: {x: 0, y: 0}
-  goalPosition: {x: 0, y: 0}
-  currentPositionWorld: {x: 0, y: 0, z: 0}
-  goalPositionWorld: {x: 0, y: 0, z: 0}
-  buildGrid: {fileID: 1142208979}
-  walkableCells: []
-  hasPath: 0
-  checkpointPosition: {x: 0, y: 0}
-  checkpointWorldPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &579588144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,6 +2468,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625159947}
   m_CullTransparentMesh: 1
+--- !u!1 &635600275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635600277}
+  - component: {fileID: 635600276}
+  m_Layer: 0
+  m_Name: Helpers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &635600276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635600275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669ca801c7d34554bbee38bede7e9284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateManager: {fileID: 1245531210}
+  buildingGrid: {fileID: 1142208979}
+--- !u!4 &635600277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635600275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -5889,7 +5879,6 @@ GameObject:
   - component: {fileID: 1245531211}
   - component: {fileID: 1245531210}
   - component: {fileID: 1245531220}
-  - component: {fileID: 1245531219}
   - component: {fileID: 1245531218}
   - component: {fileID: 1245531217}
   - component: {fileID: 1245531216}
@@ -5897,6 +5886,8 @@ GameObject:
   - component: {fileID: 1245531214}
   - component: {fileID: 1245531213}
   - component: {fileID: 1245531212}
+  - component: {fileID: 1245531219}
+  - component: {fileID: 1245531221}
   m_Layer: 0
   m_Name: StateController
   m_TagString: Untagged
@@ -5917,7 +5908,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assetStateController: {fileID: 1245531220}
-  buildStateController: {fileID: 1245531219}
+  moduleStateController: {fileID: 1245531219}
+  visitorStateController: {fileID: 1245531221}
   economyStateController: {fileID: 1245531218}
   idBindingStateData: {fileID: 1245531217}
   idStateController: {fileID: 1245531216}
@@ -6170,7 +6162,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245531209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f0d89cea4e1b8d4e93cae3deee24a4d, type: 3}
+  m_Script: {fileID: 11500000, guid: e0c66edb347afcc4299973f3216d5a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data:
@@ -6189,6 +6181,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     shipNames: []
+--- !u!114 &1245531221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245531209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 209b13cc5353b4a46b27952f1b1e7a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    ships: []
+    guests: []
 --- !u!1 &1255754373
 GameObject:
   m_ObjectHideFlags: 0

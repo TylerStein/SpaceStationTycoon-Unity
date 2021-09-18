@@ -79,11 +79,11 @@ namespace SST.Gameplay
                 GameObject instance = Instantiate(prefab, worldPos, Quaternion.identity);
                 ModuleBehaviour moduleBehaviour = instance.GetComponentInChildren<ModuleBehaviour>();
                 moduleBehaviour.instanceData = new ModuleData() {
-                    id = stateManager.idStateController.GetUniqueModuleId(),
+                    id = stateManager.idStateController.GetUniqueId(),
                     position = position,
                     moduleName = template.moduleName
                 };
-                stateManager.buildStateController.AddModule(moduleBehaviour);
+                stateManager.moduleStateController.AddModule(moduleBehaviour);
 
                 BuildCell cell = new BuildCell() {
                     gameObject = instance,
@@ -91,7 +91,7 @@ namespace SST.Gameplay
                     navType =  template.navType,
                     gridLayer = position.z,
                     gridIndex = index,
-                    moduleId = 0,
+                    moduleId = moduleBehaviour.instanceData.id,
                 };
                 buildingGrid.grid[position.x, position.y, position.z] = cell;
             } else {

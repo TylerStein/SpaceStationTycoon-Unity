@@ -1,0 +1,9 @@
+{
+  "name": "core",
+  "description": "Core gameplay resources",
+  "author": "Tyler Stein",
+  "version": "0.0.1",
+  "license": "",
+  "source": "https://github.com/TylerStein/SpaceStationTycoon-Unity",
+  "date": "2021-09-11"
+}

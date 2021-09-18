@@ -5,12 +5,7 @@ namespace SST.Data
     [System.Serializable]
     public struct VisitorStateData
     {
-        
-    }
-
-    public struct VisitorId
-    {
-        public uint id;
-        public object visitor;
+        public List<ShipData> ships;
+        public List<GuestData> guests;
     }
 }

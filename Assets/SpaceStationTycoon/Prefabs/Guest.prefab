@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2236880228958226020}
   - component: {fileID: 7104859547282768563}
+  - component: {fileID: 1426675179576090433}
   m_Layer: 0
-  m_Name: Crew
+  m_Name: Guest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +56,42 @@ MonoBehaviour:
   hasPath: 0
   checkpointPosition: {x: 0, y: 0}
   checkpointWorldPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &1426675179576090433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236880228958226027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c51474c0561564dacc73f5ebd99043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceData:
+    id: 0
+    shipId: 0
+    goods: 0
+    credits: 0
+    energy: 0
+    social: 0
+    hunger: 0
+    fun: 0
+    safety: 0
+    comfort: 0
+  stateManager: {fileID: 0}
+  stateMachine:
+    _activeState:
+      stateName: 
+    _loggingEnabled: 0
+  navAgent: {fileID: 7104859547282768563}
+  guestObject: {fileID: 2236880228958226027}
+  onShip: 1
+  hasNeed: 1
+  needModuleDomain: module
+  shipBehaviour: {fileID: 0}
+  activeTargetModule: {fileID: 0}
+  activeTargetPosition: {x: 0, y: 0}
 --- !u!1 &2236880228960011255
 GameObject:
   m_ObjectHideFlags: 0

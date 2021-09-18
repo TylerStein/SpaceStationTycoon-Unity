@@ -60,8 +60,8 @@ namespace SST.Input.Tools
                     uint id = moduleBehaviour.instanceData.id;
                     Destroy(cellObject);
 
-                    stateManager.buildStateController.RemoveModule(id);
-                    stateManager.idStateController.RecycleModuleId(id);
+                    stateManager.moduleStateController.RemoveModule(id);
+                    stateManager.idStateController.RecycleId(id);
                 }
 
                 Vector2Int[] pointsArray = new Vector2Int[size.x * size.y];

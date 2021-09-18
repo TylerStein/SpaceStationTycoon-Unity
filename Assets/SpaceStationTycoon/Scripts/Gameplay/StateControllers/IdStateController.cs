@@ -11,19 +11,18 @@ namespace SST.Gameplay.Controllers {
 
         public IdStateController() {
             data = new IdStateData() {
-                shipIdPool = UniqueIdUtility.CreatePool(defaultPoolChunkSize),
-                moduleIdPool = UniqueIdUtility.CreatePool(defaultPoolChunkSize),
+                idPool = UniqueIdUtility.CreatePool(defaultPoolChunkSize),
             };
         }
 
-        public uint GetUniqueModuleId() {
-            return UniqueIdUtility.GetUniqueId(data.moduleIdPool, defaultPoolChunkSize);
+        public uint GetUniqueId() {
+            return UniqueIdUtility.GetUniqueId(data.idPool, defaultPoolChunkSize);
         }
 
-        public void RecycleModuleId(uint id) {
-            int idx = UniqueIdUtility.GetUsedUniqueIdIndex(data.moduleIdPool, id);
+        public void RecycleId(uint id) {
+            int idx = UniqueIdUtility.GetUsedUniqueIdIndex(data.idPool, id);
             if (idx != -1) {
-                UniqueIdUtility.RecycleUniqueId(data.moduleIdPool, idx);
+                UniqueIdUtility.RecycleUniqueId(data.idPool, idx);
             }
         }
 
